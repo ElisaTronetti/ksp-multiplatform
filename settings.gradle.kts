@@ -1,29 +1,17 @@
-@file:Suppress("UnstableApiUsage")
-
 pluginManagement {
+    val kotlinVersion: String by settings
+    val kspVersion: String by settings
+    plugins {
+        id("com.google.devtools.ksp") version kspVersion apply false
+        kotlin("multiplatform") version kotlinVersion apply false
+    }
     repositories {
-        gradlePluginPortal()
-        google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
-plugins {
-    id("com.gradle.enterprise") version "3.11.1"
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "1.0.20"
-}
+rootProject.name = "ksp-multiplatform"
 
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        publishOnFailure()
-    }
-}
-
-gitHooks {
-    commitMsg { conventionalCommits() }
-    createHooks()
-}
-
-rootProject.name = "ksp-multiplatform".toLowerCase()
+include(":processor")
+include(":printer")
