@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.taskTree)
+    id("com.google.devtools.ksp")
 }
 
 repositories {
@@ -90,5 +91,13 @@ kotlin {
                 allWarningsAsErrors = true
             }
         }
+    }
+
+    dependencies {
+        add("kspCommonMainMetadata", project(":processor"))
+        add("kspJvm", project(":processor"))
+        add("kspJvmTest", project(":processor"))
+        add("kspJs", project(":processor"))
+        add("kspJsTest", project(":processor"))
     }
 }
