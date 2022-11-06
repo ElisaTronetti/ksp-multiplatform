@@ -5,6 +5,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 
 class PrinterProcessor(private val codeGenerator: CodeGenerator) : SymbolProcessor {
     override fun process(resolver: Resolver): List<KSAnnotated> {
+        val allFiles = resolver.getAllFiles().toList()
         return emptyList()
     }
 }
